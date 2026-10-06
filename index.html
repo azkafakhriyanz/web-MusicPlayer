@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aether - Web Music Player</title>
+    <title>Kaaz Music Player</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
 </head>
@@ -13,14 +13,13 @@
         <div class="video-overlay"></div>
     </div>
 
-    <!-- HOME PAGE -->
     <div id="homePage" class="page active">
         <header class="home-header">
-            <div class="brand-badge"><i class="fas fa-compact-disc fa-spin"></i> Kaaz Music Player</div>
+            <div class="brand-badge"><i class="fas fa-compact-disc fa-spin"></i>Kaaz Music Player</div>
             <h1>Music my favorite gwe</h1>
-            <p class="subtitle">azka gtg bgt</p>
+            <p class="subtitle"></p>
             <div class="header-stats">
-                <span class="stat-tag"><i class="fas fa-music"></i> <span id="songCountDisplay">7 Tracks</span></span>
+                <span class="stat-tag"><i class="fas fa-music"></i> <span id="songCountDisplay">8 Tracks</span></span>
                 <span class="stat-tag"><i class="fab fa-spotify"></i> Spotify Sync</span>
             </div>
         </header>
@@ -32,12 +31,11 @@
         </main>
     </div>
 
-    <!-- PLAYER PAGE -->
     <div id="playerPage" class="page">
         <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</button>
         <div class="music-player-container">
             <div class="music-player-box" id="playerBox">
-                <!-- Header Track Info -->
+
                 <div class="player-top">
                     <div class="album-art-wrapper">
                         <div class="vinyl-ring"></div>
@@ -52,7 +50,6 @@
                     </div>
                 </div>
 
-                <!-- Animated Equalizer Bars -->
                 <div class="visualizer" id="visualizer">
                     <div class="bar"></div>
                     <div class="bar"></div>
@@ -62,12 +59,10 @@
                     <div class="bar"></div>
                 </div>
 
-                <!-- Lyrics Section -->
                 <div id="lyricsContainer" class="lyrics-container">
                     <p class="lyric-line">Lirik akan tampil di sini...</p>
                 </div>
 
-                <!-- Player Controls -->
                 <div class="player-controls">
                     <div class="progress-section-player">
                         <div id="playerProgressBarContainer" class="progress-bar-container-player">
@@ -99,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <p class="footer-credit">/> code by kaaz</p>
+                <p class="footer-credit">kaaz/></p>
             </div>
         </div>
     </div>

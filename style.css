@@ -32,7 +32,6 @@ body {
     position: relative;
 }
 
-/* Ambient Glowing Background Effect */
 body::before {
     content: '';
     position: fixed;
@@ -57,7 +56,6 @@ body::after {
     z-index: 1;
 }
 
-/* Video Background (Diperjelas Visualnya) */
 .video-background-container {
     position: fixed;
     top: 0;
@@ -82,7 +80,7 @@ body::after {
     left: 50%;
     transform: translate(-50%, -50%);
     object-fit: cover;
-    filter: brightness(0.75) contrast(1.05); /* Kecerahan dinaikkan agar video kelihatan jelas */
+    filter: brightness(0.75) contrast(1.05);
 }
 
 .video-overlay {
@@ -91,7 +89,6 @@ body::after {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Overlay diperhalus/dipertipis agar video tidak gelap */
     background: linear-gradient(180deg, rgba(4, 7, 13, 0.25) 0%, rgba(4, 7, 13, 0.55) 100%);
     z-index: 1;
 }
@@ -119,16 +116,15 @@ body::after {
 }
 
 /* Home Header */
-/* Home Header (Tanpa Kotak / Border) */
 .home-header {
     text-align: center;
     margin-bottom: 2rem;
     width: 100%;
-    background: transparent; /* Menghapus background kotak */
-    backdrop-filter: none;    /* Menghapus efek blur kotak */
+    background: transparent;
+    backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    padding: 0;               /* Menghapus padding dalam kotak */
-    border: none;             /* Menghapus garis border */
+    padding: 0;
+    border: none;
 }
 
 .brand-badge {
@@ -150,7 +146,9 @@ body::after {
     font-size: 2.3rem;
     font-weight: 800;
     background: linear-gradient(135deg, #ffffff 30%, var(--accent-blue) 100%);
+    background-clip: text;
     -webkit-background-clip: text;
+    color: transparent;
     -webkit-text-fill-color: transparent;
     text-shadow: 0 4px 12px rgba(0,0,0,0.5);
 }
@@ -179,7 +177,6 @@ body::after {
     border-radius: 12px;
 }
 
-/* Main Content & Song List */
 .main-content {
     width: 100%;
 }
@@ -200,7 +197,7 @@ body::after {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
@@ -266,6 +263,7 @@ body::after {
     gap: 5px;
     transition: all 0.3s ease;
     backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
 }
 
 .btn-open-spotify:hover {
@@ -294,6 +292,7 @@ body::after {
     left: 1rem;
     background: var(--bg-card);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     color: var(--text-main);
     padding: 0.6rem 1.2rem;
@@ -309,7 +308,7 @@ body::after {
     color: #000;
 }
 
-/* Player UI Container (Translucent Modern) */
+/* Player UI Container */
 .music-player-container {
     width: 100%;
     display: flex;
@@ -320,8 +319,8 @@ body::after {
 
 .music-player-box {
     background: rgba(10, 16, 28, 0.42);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(56, 189, 248, 0.25);
     border-radius: 2.2rem;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 25px rgba(56, 189, 248, 0.15);
@@ -330,6 +329,7 @@ body::after {
     padding: 1.75rem;
     display: flex;
     flex-direction: column;
+    will-change: transform, box-shadow; /* Optimisasi Render GPU */
 }
 
 .player-top {
@@ -355,18 +355,18 @@ body::after {
 
 .vinyl-ring {
     position: absolute;
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
+    top: -6px;
+    left: -6px;
+    right: -6px;
+    bottom: -6px;
     border-radius: 1.4rem;
     border: 2px dashed var(--accent-blue);
     opacity: 0;
-    transition: all 0.5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .playing .vinyl-ring {
-    opacity: 0.7;
+    opacity: 0.8;
     animation: spin 10s linear infinite;
 }
 
@@ -540,6 +540,7 @@ body::after {
 
 .control-btn-player.active-feature {
     color: var(--accent-blue) !important;
+    text-shadow: 0 0 8px var(--accent-blue);
 }
 
 .secondary-controls-player {
@@ -564,6 +565,7 @@ body::after {
 .volume-slider-player, .speed-slider {
     width: 65px;
     height: 4px;
+    appearance: none;
     -webkit-appearance: none;
     background: rgba(255, 255, 255, 0.2);
     border-radius: 4px;
@@ -571,12 +573,14 @@ body::after {
 }
 
 .volume-slider-player::-webkit-slider-thumb, .speed-slider::-webkit-slider-thumb {
+    appearance: none;
     -webkit-appearance: none;
     width: 12px;
     height: 12px;
     background: var(--accent-blue);
     border-radius: 50%;
     cursor: pointer;
+    box-shadow: 0 0 8px var(--accent-blue);
 }
 
 #currentSpeedDisplay {
