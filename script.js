@@ -69,11 +69,11 @@ let songs = [
             { time: 12.7, text: "Baby, there's no other superstar" },
             { time: 15, text: "You know that I'll be" },
             { time: 17, text: "Your papa-paparazzi" },
-            { time: 19.7    , text: "Promise I'll be kind" },
+            { time: 19.7, text: "Promise I'll be kind" },
             { time: 22, text: "But I won't stop until that boy is mine" },
             { time: 26.5, text: "Baby, you'll be famous" },
             { time: 28, text: "Chase you down until you love me" },
-            { time: 31, text: "Papa-paparazzi" },
+            { time: 31, text: "Papa-paparazzi" }
         ]
     },
     {
@@ -177,10 +177,10 @@ let songs = [
             { time: 23.8, text: "Why you're out on your own" },
             { time: 26.7, text: "Merry Christmas" },
             { time: 28.8, text: "please don't call" },
-            { time: 30, text:   "Merry Christmas" },
+            { time: 30, text: "Merry Christmas" },
             { time: 32.8, text: "I'm not yours at all" },
             { time: 35, text: "Merry Christmas" },
-            { time: 37, text: " please don't call me" },
+            { time: 37, text: " please don't call me" }
         ]
     },
     {
@@ -199,7 +199,7 @@ let songs = [
             { time: 5.8, text: "And one day" },
             { time: 9.7, text: "I am gonna grow wings" },
             { time: 13.7, text: "A chemical reaction " },
-            { time: 18.7, text: "Hysterical and useless" },
+            { time: 18.7, text: "Hysterical and useless" }
         ]
     }
 ];
@@ -219,13 +219,13 @@ function lerp(start, end, amt) {
     return (1 - amt) * start + amt * end;
 }
 
-// Render Home Page
 function renderHome() {
     songCountDisplay.textContent = `${songs.length} Tracks`;
 
     songListElement.innerHTML = '';
     songs.forEach((song, index) => {
         const li = document.createElement('li');
+
         li.innerHTML = `
             <div class="song-item-left">
                 <span class="song-index">${index < 9 ? '0' : ''}${index + 1}</span>
@@ -247,10 +247,9 @@ function renderHome() {
             currentSongIndex = index;
             loadSong(songs[currentSongIndex]);
             playTrack();
-            showPlayerPage();
+            morphOpenPlayer(li);
         });
 
-        // Hover Video Background Preview
         li.addEventListener('mouseenter', () => {
             if (homePage.classList.contains('active') && song.videoBgSrc) {
                 backgroundVideo.src = song.videoBgSrc;
@@ -271,7 +270,38 @@ function renderHome() {
     });
 }
 
-// Navigation
+function morphOpenPlayer(cardElement) {
+    const cardRect = cardElement.getBoundingClientRect();
+
+    homePage.classList.remove('active');
+    playerPage.classList.add('active');
+    backgroundVideoContainer.classList.add('active');
+
+    const song = songs[currentSongIndex];
+    if (song && song.videoBgSrc) {
+        backgroundVideo.src = song.videoBgSrc;
+        backgroundVideo.load();
+        backgroundVideo.play().catch(e => console.error("Video error:", e));
+    }
+
+    const targetRect = playerBox.getBoundingClientRect();
+
+    const deltaX = cardRect.left - targetRect.left;
+    const deltaY = cardRect.top - targetRect.top;
+    const deltaW = cardRect.width / targetRect.width;
+    const deltaH = cardRect.height / targetRect.height;
+
+    playerBox.style.transition = 'none';
+    playerBox.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${deltaW}, ${deltaH})`;
+    playerBox.style.opacity = '0.6';
+
+    requestAnimationFrame(() => {
+        playerBox.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease';
+        playerBox.style.transform = 'translate(0, 0) scale(1, 1)';
+        playerBox.style.opacity = '1';
+    });
+}
+
 function showHomePage() {
     playerPage.classList.remove('active');
     homePage.classList.add('active');
@@ -371,7 +401,6 @@ audioPlayer.onended = () => {
     }
 };
 
-// Toggle Controls
 playerRepeatBtn.addEventListener('click', () => {
     isRepeat = !isRepeat;
     playerRepeatBtn.classList.toggle('active-feature', isRepeat);
@@ -390,7 +419,6 @@ function startSmoothPulseLoop() {
             targetScale = 1;
             targetGlow = 25;
         } else {
-
             const time = audioPlayer.currentTime * 3;
             targetScale = 1 + Math.sin(time) * 0.012; 
             targetGlow = 25 + Math.sin(time) * 15;

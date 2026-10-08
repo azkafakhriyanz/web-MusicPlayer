@@ -15,12 +15,12 @@
 
     <div id="homePage" class="page active">
         <header class="home-header">
-            <div class="brand-badge"><i class="fas fa-compact-disc fa-spin"></i>Kaaz Music Player</div>
+            <div class="brand-badge"><i class="fas fa-compact-disc fa-spin"></i> Kaaz Music Player</div>
             <h1>Music my favorite gwe</h1>
             <p class="subtitle"></p>
             <div class="header-stats">
                 <span class="stat-tag"><i class="fas fa-music"></i> <span id="songCountDisplay">8 Tracks</span></span>
-                <span class="stat-tag"><i class="fab fa-spotify"></i> Spotify Sync</span>
+                <span class="stat-tag"><i class="fZab fa-spotify"></i> Spotify Sync</span>
             </div>
         </header>
 
@@ -32,9 +32,14 @@
     </div>
 
     <div id="playerPage" class="page">
-        <button id="backToHomeBtn" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</button>
         <div class="music-player-container">
             <div class="music-player-box" id="playerBox">
+                <div class="player-nav-header">
+                    <button id="backToHomeBtn" class="back-btn-inline">
+                        <i class="fas fa-chevron-left"></i> Kembali
+                    </button>
+                    <span class="player-header-badge"><i class="fas fa-headphones"></i> Now Playing</span>
+                </div>
 
                 <div class="player-top">
                     <div class="album-art-wrapper">
